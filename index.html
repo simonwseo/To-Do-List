@@ -1,0 +1,29 @@
+<!DOCTYPE Html>
+<html lang = "eng">
+  <head>
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit =no">
+    <link rel="stylesheet" href="main.css">
+    <title>To Do list</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1> To Do List </h1>
+        <button id="displayTodos">Display List</button>
+        <button id="toggleAll"> Toggle All </button><br>
+
+        <button onclick="handlers.displayTodos()">Display List</button>
+        <button onclick="handlers.toggleAll()">Toggle All </button>
+
+        <input type="text" id="listItem">
+        <button id="addList">Add </button>
+        <ul id="theList">
+        </ul>
+
+      </div>
+    </div>
+     <script src="script.js"></script>
+  </body>
+</html>
