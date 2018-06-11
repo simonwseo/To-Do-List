@@ -91,14 +91,21 @@ let todoList = {
 
     //run function to match data value
     todoList.toggleCompleted(position);
+
+    //add & remove style based on boolean value
+    if (todoList.todos[position].completed === true){
     targetItem.style.color = 'gray';
     targetItem.style.fontStyle = 'italic';
     targetItem.style.textDecoration = 'line-through';
+  }else{
+    targetItem.style.color ="black";
+    targetItem.style.fontStyle = 'normal';
+    targetItem.style.textDecoration = 'none';
   }
-
+   }
   }
+},
 
-  },
   changeTodo: function(targetNum, content) {
   this.todos[targetNum] = content;
   },
