@@ -1,12 +1,27 @@
-const displayTodos = document.getElementById('displayTodos');
-const toggleAll = document.getElementById('toggleAll');
+const input = document.getElementById('listItem');
+const addList = document.getElementById('addList');
+const list = document.getElementById('theList');
+
+input.addEventListener('keyPress', function (e){
+  var key = e.which || e.keyCode;
+  if (key == 13){
+    todoList.addTodo;
+  }
+})
+
+
+
 const handlers = {
    displayTodos: () => {
       todoList.displayTodos();
     },
     toggleAll: () => {
       todoList.toggleAll();
+    },
+    addTodo: () =>{
+      todoList.addTodo(input.value);
     }
+
 };
 
 let todoList = {
@@ -27,10 +42,17 @@ let todoList = {
     }
   },
   addTodo: function(todoText) {
+
+
     this.todos.push({
       todoText: todoText,
       completed: false
     });
+
+    let listItem = document.createElement('li');
+    listItem.textContent = "↠" + input.value;
+    theList.appendChild(listItem);
+
   },
   changeTodo: function(targetNum, content) {
   this.todos[targetNum] = content;
@@ -67,12 +89,3 @@ let todoList = {
   }
 
 };
-
-
-displayTodos.addEventListener ('click', () => {
-   todoList.displayTodos();
-})
-
-toggleAll.addEventListener ('click', () =>{
-  todoList.toggleAll();
-})

@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+ul {
+  padding: 0;
+}
+
+li {
+  display:block;
+}
 
 .container{
   padding-left: 0.5px;
@@ -12,4 +19,11 @@
 .box{
   height: 30em;
   border: 2px solid black;
+}
+
+.listStyle{
+  width: 31%;
+  margin: 0 auto;
+  text-align: left;
+
 }
