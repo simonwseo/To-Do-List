@@ -2,6 +2,7 @@ const input = document.getElementById('listItem');
 const addList = document.getElementById('addList');
 const list = document.getElementById('theList');
 const checkBox = document.getElementsByClassName('completed');
+const todoListItems = document.getElementsByTagName('li');
 
 
 /* Pressing Enter to Submit .. in progress*/
@@ -24,11 +25,12 @@ const handlers = {
     addTodo: () =>{
       todoList.addTodo(input.value);
     },
-    toggleCompleted: () => {
-      todoList.toggleCompleted(position);
-    }
 
 };
+
+
+
+
 
 let todoList = {
   todos: [],
@@ -65,21 +67,35 @@ let todoList = {
     let listItem = document.createElement('li');
     let completedItem = document.createElement('input');
 
+    listItem.className = "todoStyle";
+    listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
+
     completedItem.type = 'checkbox';
     completedItem.className = 'completed';
 
-    listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
     listItem.appendChild(completedItem);
-    listItem.className = "todoStyle";
     theList.appendChild(listItem);
-
 
     input.value = "";
 
-    this.todos.push({
+    let arrayNum = this.todos.push({
       todoText: listItem.textContent,
       completed: false
     });
+
+// adding onclick attribute for the newly created check box item
+  completedItem.onclick = function (){
+    //minus 1 since .push returns position starting from 1s
+    let position = arrayNum - 1;
+    let targetItem = todoListItems[position];
+
+    //run function to match data value
+    todoList.toggleCompleted(position);
+    targetItem.style.color = 'gray';
+    targetItem.style.fontStyle = 'italic';
+    targetItem.style.textDecoration = 'line-through';
+  }
+
   }
 
   },
@@ -90,11 +106,13 @@ let todoList = {
     this.todos.splice(itemNumber, 1);
   },
   toggleCompleted: function(position){
+
     let todo = this.todos[position];
     todo.completed = !todo.completed;
   },
 
   toggleAll: function(){
+
     let totalTodos = this.todos.length;
     let completedTodos = 0;
 
