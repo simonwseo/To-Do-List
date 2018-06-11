@@ -1,13 +1,16 @@
 const input = document.getElementById('listItem');
 const addList = document.getElementById('addList');
 const list = document.getElementById('theList');
+const checkBox = document.getElementsByClassName('completed');
 
-input.addEventListener('keyPress', function (e){
-  var key = e.which || e.keyCode;
-  if (key == 13){
-    todoList.addTodo;
-  }
-})
+
+/* Pressing Enter to Submit .. in progress*/
+// input.addEventListener('keyPress', function (e){
+//   var key = e.which || e.keyCode;
+//   if (key == 13){
+//     todoList.addTodo;
+//   }
+// })
 
 
 
@@ -20,6 +23,9 @@ const handlers = {
     },
     addTodo: () =>{
       todoList.addTodo(input.value);
+    },
+    toggleCompleted: () => {
+      todoList.toggleCompleted(position);
     }
 
 };
@@ -42,16 +48,39 @@ let todoList = {
     }
   },
   addTodo: function(todoText) {
+   let blankSpace = 0;
 
+    //Prevents user from entering invalid todo item
+    for(let i = 0; i < todoText.length; i++){
+      if (todoText[i] === " "){
+        blankSpace++;
+      }
+    }
+
+    if (blankSpace === todoText.length){
+      alert('Please enter at least one character.');
+    }else{
+
+    //Create an li element and add the input value as text content
+    let listItem = document.createElement('li');
+    let completedItem = document.createElement('input');
+
+    completedItem.type = 'checkbox';
+    completedItem.className = 'completed';
+
+    listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
+    listItem.appendChild(completedItem);
+    listItem.className = "todoStyle";
+    theList.appendChild(listItem);
+
+
+    input.value = "";
 
     this.todos.push({
-      todoText: todoText,
+      todoText: listItem.textContent,
       completed: false
     });
-
-    let listItem = document.createElement('li');
-    listItem.textContent = "↠" + input.value;
-    theList.appendChild(listItem);
+  }
 
   },
   changeTodo: function(targetNum, content) {
@@ -79,10 +108,13 @@ let todoList = {
     if (totalTodos === completedTodos){
          for(let i = 0; i < totalTodos; i++){
            this.todos[i].completed = false;
+           checkBox[i].checked = false;
+
          }
        }else{
          for(let i = 0; i < this.todos.length; i++){
            this.todos[i].completed = true;
+           checkBox[i].checked = true;
        }
      }
 

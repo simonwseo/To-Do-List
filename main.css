@@ -4,11 +4,16 @@
 
 ul {
   padding: 0;
+  list-style: none;
 }
 
-li {
-  display:block;
+
+p {
+  margin: 5px 0;
 }
+
+
+
 
 .container{
   padding-left: 0.5px;
@@ -22,8 +27,12 @@ li {
 }
 
 .listStyle{
-  width: 31%;
+  width: 50%;
   margin: 0 auto;
   text-align: left;
+}
 
+.todoStyle{
+  display: flex;
+  justify-content: space-between;
 }
