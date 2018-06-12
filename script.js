@@ -1,8 +1,8 @@
 const input = document.getElementById('listItem');
 const addList = document.getElementById('addList');
-const list = document.getElementById('theList');
+const ul = document.querySelector('ul');
 const checkBox = document.getElementsByClassName('completed');
-const todoListItems = document.getElementsByTagName('li');
+const li = document.getElementsByTagName('li');
 
 
 /* Pressing Enter to Submit .. in progress*/
@@ -50,6 +50,9 @@ let todoList = {
     }
   },
   addTodo: function(todoText) {
+
+   let compareText = "↠	" + todoText;
+   let matchCounter = 0;
    let blankSpace = 0;
 
     //Prevents user from entering invalid todo item
@@ -63,6 +66,17 @@ let todoList = {
       alert('Please enter at least one character.');
     }else{
 
+debugger;
+      for(let i = 0; i < this.todos.length; i++){
+        if (compareText === this.todos[i].todoText){
+          matchCounter++;
+        }
+      }
+
+      if (matchCounter > 0){
+        
+      }
+
     //Create an li element and add the input value as text content
     let listItem = document.createElement('li');
     let completedItem = document.createElement('input');
@@ -74,33 +88,39 @@ let todoList = {
     completedItem.className = 'completed';
 
     listItem.appendChild(completedItem);
-    theList.appendChild(listItem);
+    ul.appendChild(listItem);
 
     input.value = "";
 
-    let arrayNum = this.todos.push({
+    this.todos.push({
       todoText: listItem.textContent,
       completed: false
     });
 
 // adding onclick attribute for the newly created check box item
-  completedItem.onclick = function (){
-    //minus 1 since .push returns position starting from 1s
-    let position = arrayNum - 1;
-    let targetItem = todoListItems[position];
+  completedItem.onclick = function (event){
+
+    let p = event.target.previousElementSibling;
+    let position;
+
+    for (let i = 0; i < todoList.todos.length; i++){
+      if (p.textContent === todoList.todos[i].todoText){
+        position = i;
+      }
+    }
 
     //run function to match data value
     todoList.toggleCompleted(position);
 
     //add & remove style based on boolean value
     if (todoList.todos[position].completed === true){
-    targetItem.style.color = 'gray';
-    targetItem.style.fontStyle = 'italic';
-    targetItem.style.textDecoration = 'line-through';
+    li[position].style.color = 'gray';
+    li[position].style.fontStyle = 'italic';
+    li[position].style.textDecoration = 'line-through';
   }else{
-    targetItem.style.color ="black";
-    targetItem.style.fontStyle = 'normal';
-    targetItem.style.textDecoration = 'none';
+    li[position].style.color ="black";
+    li[position].style.fontStyle = 'normal';
+    li[position].style.textDecoration = 'none';
   }
    }
   }
