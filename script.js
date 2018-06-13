@@ -27,6 +27,9 @@ const handlers = {
     addTodo: () =>{
       todoList.addTodo(input.value);
     },
+    deleteAll: () =>{
+
+    }
 
 };
 
@@ -64,7 +67,6 @@ let todoList = {
   addTodo: function(todoText) {
 
    let compareText = "↠	" + todoText;
-   let matchCounter = 0;
    let blankSpace = 0;
 
     //Prevents user from entering invalid todo item
@@ -84,8 +86,6 @@ let todoList = {
     let listItem = document.createElement('li');
     let container = document.createElement('div');
     let completedItem = document.createElement('input');
-    let repeatTally = document.createElement('span');
-
 
     listItem.className = "todoStyle";
     listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
@@ -96,19 +96,6 @@ let todoList = {
     ul.appendChild(listItem);
     listItem.appendChild(container);
     container.appendChild(completedItem);
-    container.appendChild(repeatTally);
-
-    // Finding out how many repeats there are
-    for(let i = 0; i < this.todos.length; i++){
-      if (compareText === this.todos[i].todoText){
-        matchCounter++;
-      }
-    }
-    // Adding it as a tally
-    if (matchCounter > 0){
-      repeatTally.textContent = matchCounter;
-    }
-
 
     input.value = "";
 
@@ -119,13 +106,10 @@ let todoList = {
 
 // adding onclick attribute for the newly created check box item
   completedItem.onclick = function (event){
-    let div = event.target.parentElement;
-    let listItem = div.previousElementSibling;
 
-    let position;
 
     for (let i = 0; i < todoList.todos.length; i++){
-      if (listItem.textContent === todoList.todos[i].todoText){
+      if (event.target === checkBox[i]){
         position = i;
       }
     }
@@ -176,11 +160,19 @@ let todoList = {
            this.todos[i].completed = false;
            checkBox[i].checked = false;
 
+           li[i].style.color ="black";
+           li[i].style.fontStyle = 'normal';
+           li[i].style.textDecoration = 'none';
+
          }
        }else{
          for(let i = 0; i < this.todos.length; i++){
            this.todos[i].completed = true;
            checkBox[i].checked = true;
+
+           li[i].style.color = 'gray';
+           li[i].style.fontStyle = 'italic';
+           li[i].style.textDecoration = 'line-through';
        }
      }
 
