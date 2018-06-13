@@ -3,10 +3,12 @@ const addList = document.getElementById('addList');
 const ul = document.querySelector('ul');
 const checkBox = document.getElementsByClassName('completed');
 const li = document.getElementsByTagName('li');
+const body = document.getElementsByTagName('body')[0];
+const displayItems = document.getElementById('displayItems');
 
 
 /* Pressing Enter to Submit .. in progress*/
-// input.addEventListener('keyPress', function (e){
+// body.addEventListener('keyPress', function (e){
 //   var key = e.which || e.keyCode;
 //   if (key == 13){
 //     todoList.addTodo;
@@ -48,6 +50,16 @@ let todoList = {
         }
       }
     }
+    //hides list
+    if (ul.style.display == 'none'){
+       displayItems.textContent = 'Hide list';
+       ul.style.display = 'block';
+    }else{
+        displayItems.textContent = 'Show list';
+        ul.style.display = 'none';
+    }
+
+
   },
   addTodo: function(todoText) {
 
@@ -66,20 +78,14 @@ let todoList = {
       alert('Please enter at least one character.');
     }else{
 
-debugger;
-      for(let i = 0; i < this.todos.length; i++){
-        if (compareText === this.todos[i].todoText){
-          matchCounter++;
-        }
-      }
-
-      if (matchCounter > 0){
-        
-      }
 
     //Create an li element and add the input value as text content
+
     let listItem = document.createElement('li');
+    let container = document.createElement('div');
     let completedItem = document.createElement('input');
+    let repeatTally = document.createElement('span');
+
 
     listItem.className = "todoStyle";
     listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
@@ -87,24 +93,39 @@ debugger;
     completedItem.type = 'checkbox';
     completedItem.className = 'completed';
 
-    listItem.appendChild(completedItem);
     ul.appendChild(listItem);
+    listItem.appendChild(container);
+    container.appendChild(completedItem);
+    container.appendChild(repeatTally);
+
+    // Finding out how many repeats there are
+    for(let i = 0; i < this.todos.length; i++){
+      if (compareText === this.todos[i].todoText){
+        matchCounter++;
+      }
+    }
+    // Adding it as a tally
+    if (matchCounter > 0){
+      repeatTally.textContent = matchCounter;
+    }
+
 
     input.value = "";
 
     this.todos.push({
-      todoText: listItem.textContent,
+      todoText: listItem.firstElementChild.textContent,
       completed: false
     });
 
 // adding onclick attribute for the newly created check box item
   completedItem.onclick = function (event){
+    let div = event.target.parentElement;
+    let listItem = div.previousElementSibling;
 
-    let p = event.target.previousElementSibling;
     let position;
 
     for (let i = 0; i < todoList.todos.length; i++){
-      if (p.textContent === todoList.todos[i].todoText){
+      if (listItem.textContent === todoList.todos[i].todoText){
         position = i;
       }
     }
