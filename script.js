@@ -64,7 +64,7 @@ let todoList = {
   },
   addTodo: function(todoText) {
 
-   let compareText = "↠	" + todoText;
+   let compareText = "↠" + todoText;
    let blankSpace = 0;
 
     //Prevents user from entering invalid todo item
@@ -87,7 +87,7 @@ let todoList = {
     let deleteButton = document.createElement('button');
 
     listItem.className = "todoStyle";
-    listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
+    listItem.innerHTML ="<p>" + "↠" + todoText + "</p>";
 
     completedItem.type = 'checkbox';
     completedItem.className = 'completed';
