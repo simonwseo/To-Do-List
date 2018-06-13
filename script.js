@@ -2,6 +2,7 @@ const input = document.getElementById('listItem');
 const addList = document.getElementById('addList');
 const ul = document.querySelector('ul');
 const checkBox = document.getElementsByClassName('completed');
+const deleteItem = document.getElementsByClassName('deleteButton');
 const li = document.getElementsByTagName('li');
 const body = document.getElementsByTagName('body')[0];
 const displayItems = document.getElementById('displayItems');
@@ -26,9 +27,6 @@ const handlers = {
     },
     addTodo: () =>{
       todoList.addTodo(input.value);
-    },
-    deleteAll: () =>{
-
     }
 
 };
@@ -86,6 +84,7 @@ let todoList = {
     let listItem = document.createElement('li');
     let container = document.createElement('div');
     let completedItem = document.createElement('input');
+    let deleteButton = document.createElement('button');
 
     listItem.className = "todoStyle";
     listItem.innerHTML ="<p>" + "↠&Tab;" + todoText + "</p>";
@@ -93,9 +92,14 @@ let todoList = {
     completedItem.type = 'checkbox';
     completedItem.className = 'completed';
 
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'deleteButton';
+
     ul.appendChild(listItem);
     listItem.appendChild(container);
     container.appendChild(completedItem);
+    container.appendChild(deleteButton);
+
 
     input.value = "";
 
@@ -104,16 +108,27 @@ let todoList = {
       completed: false
     });
 
+    deleteButton.onclick = function (event){
+        let div = event.target.parentNode;
+        let todoItem = div.parentNode;
+
+      for (let i = 0; i < todoList.todos.length; i++){
+        	if (event.target === deleteItem[i]){
+            position = i;
+          }
+        }
+        todoList.deleteTodo(position);
+        ul.removeChild(todoItem);
+
+      }
+
 // adding onclick attribute for the newly created check box item
   completedItem.onclick = function (event){
-
-
     for (let i = 0; i < todoList.todos.length; i++){
       if (event.target === checkBox[i]){
         position = i;
       }
     }
-
     //run function to match data value
     todoList.toggleCompleted(position);
 
