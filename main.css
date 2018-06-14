@@ -21,6 +21,11 @@ p {
   word-wrap: break-word;
 }
 
+input[type=checkbox],
+button{
+  cursor: pointer;
+}
+
 
 #listItem {
   width:75%;
@@ -61,9 +66,6 @@ p {
 
 }
 
-
-
-
 .container{
   text-align: center;
   margin: 0 auto;
@@ -80,10 +82,14 @@ p {
   justify-content: space-between;
 }
 
+.completed{
+  padding: 0.5px 3.5px;
+}
+
 .deleteButton{
   background-color: firebrick;
   border-radius: 5px;
-  padding: 0.5px 3.5px;
+  padding: 1px 4px;
   color: white;
 }
 

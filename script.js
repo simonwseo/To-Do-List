@@ -27,8 +27,10 @@ const handlers = {
     },
     addTodo: () =>{
       todoList.addTodo(input.value);
+    },
+    deleteAll: () =>{
+      todoList.deleteAll();
     }
-
 };
 
 
@@ -108,6 +110,7 @@ let todoList = {
       completed: false
     });
 
+//Deleting Todos
     deleteButton.onclick = function (event){
         let div = event.target.parentNode;
         let todoItem = div.parentNode;
@@ -117,8 +120,12 @@ let todoList = {
             position = i;
           }
         }
+
+        if (confirm ('Are you sure you want to delete this item?')){
         todoList.deleteTodo(position);
         ul.removeChild(todoItem);
+      }else{
+      }
 
       }
 
@@ -190,7 +197,19 @@ let todoList = {
            li[i].style.textDecoration = 'line-through';
        }
      }
+   },
 
-  }
+//Deletes everything on the list
+   deleteAll: function(){
+     let todo = this.todos;
+
+     if (confirm ('Are you sure you want to delete everything?')){
+       ul.innerHTML = "";
+       todo.splice(0,todo.length);
+       }else{
+
+       }
+
+   }
 
 };
