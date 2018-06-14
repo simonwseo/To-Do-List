@@ -30,6 +30,9 @@ const handlers = {
     },
     deleteAll: () =>{
       todoList.deleteAll();
+    },
+    clearAllChecked: () =>{
+      todoList.clearAllChecked();
     }
 };
 
@@ -209,7 +212,22 @@ let todoList = {
        }else{
 
        }
+    },
 
+//Clears all that are Checked
+    clearAllChecked: function(){
+
+
+  for (let i = 0; i < checkBox.length; i++){
+    for (let i = 0; i < checkBox.length; i++){
+        if (checkBox[i].checked === true){
+          ul.removeChild(li[i]);
+          this.todos.splice(i,1);
+     }
+    }
+    if (checkBox.length === 1){
+      i = -1;
+    }
    }
-
+  }
 };

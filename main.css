@@ -2,10 +2,21 @@
   box-sizing: border-box;
 }
 
+
+.container{
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 2px solid black;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 ul {
   padding-left: 0;
   list-style: none;
-  margin: 1em 0.5em;
   margin-bottom: 0.5em;
   text-align: left;
 }
@@ -34,11 +45,11 @@ button{
   border-radius: 5px;
   border-color: transparent;
   background-color: rgba(30,30,30,0.1);
-  margin-right: 2px;
-  margin-left: 2px;
+  /* margin-right: 2px;
+  margin-left: 2px; */
   margin-bottom: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
+  /* padding-right: 5px;
+  padding-left: 5px; */
   transition: 0.25s;
 
 }
@@ -66,16 +77,6 @@ button{
 #addList:active{
   transform:scale(0.9);
   box-shadow: inset 10px 10px black;
-
-}
-
-.container{
-  text-align: center;
-  margin: 0 auto;
-  padding-bottom: 10px;
-  border: 2px solid black;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
 
 }
 
@@ -117,40 +118,44 @@ button{
 
 
 
-@media (min-width: 34em){
+@media (min-width: 30em){
   .container{
     width:90%;
-  }
-  li{
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
-@media (min-width: 42em){
+@media (min-width: 37em){
+  .container{
+    width: 80%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+}
+
+@media (min-width: 48em){
   .container{
     width: 75%;
+    padding-left: 40px;
+    padding-right: 40px;
   }
-
 }
 
-@media (min-width: 52.5em){
+@media (min-width: 54em){
   .container{
     width: 65%;
-  }
-
-  li{
-    padding-right: 2em;
-    padding-left: 2em;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 }
 
-@media (min-width: 75em){
+
+@media (min-width: 65em){
   .container{
-    width: 55%;
-  }
-  li{
-    padding-right: 2.7em;
-    padding-left: 2.7em;
+    width: 50%;
+    padding-left: 75px;
+    padding-right: 75px;
   }
 }
