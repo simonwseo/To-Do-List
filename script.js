@@ -92,7 +92,7 @@ let todoList = {
     completedItem.type = 'checkbox';
     completedItem.className = 'completed';
 
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = 'X';
     deleteButton.className = 'deleteButton';
 
     ul.appendChild(listItem);
