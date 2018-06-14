@@ -55,10 +55,10 @@ let todoList = {
     }
     //hides list
     if (ul.style.display == 'none'){
-       displayItems.textContent = 'Hide list';
+       displayItems.textContent = 'Hide List';
        ul.style.display = 'block';
     }else{
-        displayItems.textContent = 'Show list';
+        displayItems.textContent = 'Show List';
         ul.style.display = 'none';
     }
 
