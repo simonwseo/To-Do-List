@@ -8,14 +8,6 @@ const body = document.getElementsByTagName('body')[0];
 const displayItems = document.getElementById('displayItems');
 
 
-/* Pressing Enter to Submit .. in progress*/
-// body.addEventListener('keyPress', function (e){
-//   var key = e.which || e.keyCode;
-//   if (key == 13){
-//     todoList.addTodo;
-//   }
-// })
-
 
 
 const handlers = {
