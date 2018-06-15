@@ -3,6 +3,7 @@ const addList = document.getElementById('addList');
 const ul = document.querySelector('ul');
 const checkBox = document.getElementsByClassName('completed');
 const deleteItem = document.getElementsByClassName('deleteButton');
+const changeItem = document.getElementsByClassName('changeButton');
 const li = document.getElementsByTagName('li');
 const body = document.getElementsByTagName('body')[0];
 const displayItems = document.getElementById('displayItems');
@@ -82,6 +83,7 @@ let todoList = {
     let container = document.createElement('div');
     let completedItem = document.createElement('input');
     let deleteButton = document.createElement('button');
+    let changeButton = document.createElement('button');
 
     listItem.className = "todoStyle";
     listItem.innerHTML ="<p>" + "↠" + todoText + "</p>";
@@ -92,10 +94,14 @@ let todoList = {
     deleteButton.textContent = 'X';
     deleteButton.className = 'deleteButton';
 
+    changeButton.textContent = 'Edit'
+    changeButton.className = 'changeButton'
+
     ul.appendChild(listItem);
     listItem.appendChild(container);
     container.appendChild(completedItem);
     container.appendChild(deleteButton);
+    container.appendChild(changeButton);
 
 
     input.value = "";
@@ -105,10 +111,33 @@ let todoList = {
       completed: false
     });
 
+//Change Todos
+    changeButton.onclick = function (event){
+      let div = event.target.parentNode;
+      let p = div.previousElementSibling;
+      let previousText = p.textContent;
+      let position;
+
+
+      for (let i = 0; i < todoList.todos.length; i++){
+        debugger;
+        if (event.target === changeItem[i]){
+          position = i;
+        }
+      }
+
+      p.innerHTML = '↠<input type="text" class="change" placeholder=" ' + previousText + '">';
+
+      let
+
+    }
+
+
 //Deleting Todos
     deleteButton.onclick = function (event){
         let div = event.target.parentNode;
         let todoItem = div.parentNode;
+        let position;
 
       for (let i = 0; i < todoList.todos.length; i++){
         	if (event.target === deleteItem[i]){
@@ -208,18 +237,35 @@ let todoList = {
 
 //Clears all that are Checked
     clearAllChecked: function(){
+      let allClear = 0;
+
+  for (let i = 0; i < checkBox.length; i++){
+    if (checkBox[i].checked === true){
+      allClear++;
+    }
+  }
+
+  if (allClear === checkBox.length){
+    ul.innerHTML = "";
+    this.todos.splice(0,this.todos.length);
+  }
 
 
+
+if (checkBox.length > 0){
+  debugger;
   for (let i = 0; i < checkBox.length; i++){
     for (let i = 0; i < checkBox.length; i++){
         if (checkBox[i].checked === true){
           ul.removeChild(li[i]);
           this.todos.splice(i,1);
+          allClear--;
      }
     }
-    if (checkBox.length === 1){
+    if (allClear === 1){
       i = -1;
     }
-   }
   }
+ }
+}
 };
