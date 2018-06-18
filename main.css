@@ -48,8 +48,8 @@ button{
   /* margin-right: 2px;
   margin-left: 2px; */
   margin-bottom: 10px;
-  /* padding-right: 5px;
-  padding-left: 5px; */
+  padding-right: 5px;
+  padding-left: 5px;
   transition: 0.25s;
 
 }
@@ -97,6 +97,11 @@ button{
   color: white;
 }
 
+.changeButton,
+.cancelButton{
+  border-radius: 50%;
+}
+
 
 .globalButtons button{
   padding: 5px 10px;
@@ -128,7 +133,7 @@ button{
 
 @media (min-width: 37em){
   .container{
-    width: 80%;
+    width: 85%;
     padding-left: 30px;
     padding-right: 30px;
   }
@@ -137,7 +142,7 @@ button{
 
 @media (min-width: 48em){
   .container{
-    width: 75%;
+    width: 80%;
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -145,7 +150,7 @@ button{
 
 @media (min-width: 54em){
   .container{
-    width: 65%;
+    width: 70%;
     padding-left: 50px;
     padding-right: 50px;
   }
@@ -154,7 +159,7 @@ button{
 
 @media (min-width: 65em){
   .container{
-    width: 50%;
+    width: 55%;
     padding-left: 75px;
     padding-right: 75px;
   }

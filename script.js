@@ -1,12 +1,13 @@
 const input = document.getElementById('listItem');
 const addList = document.getElementById('addList');
 const ul = document.querySelector('ul');
+const li = document.getElementsByTagName('li');
+const changeInput = document.getElementsByClassName('changeInput');
 const checkBox = document.getElementsByClassName('completed');
 const deleteItem = document.getElementsByClassName('deleteButton');
 const changeItem = document.getElementsByClassName('changeButton');
-const li = document.getElementsByTagName('li');
-const body = document.getElementsByTagName('body')[0];
 const displayItems = document.getElementById('displayItems');
+
 
 
 
@@ -28,9 +29,6 @@ const handlers = {
       todoList.clearAllChecked();
     }
 };
-
-
-
 
 
 let todoList = {
@@ -94,7 +92,7 @@ let todoList = {
     deleteButton.textContent = 'X';
     deleteButton.className = 'deleteButton';
 
-    changeButton.textContent = 'Edit'
+    changeButton.innerHTML = '&#9998;'
     changeButton.className = 'changeButton'
 
     ul.appendChild(listItem);
@@ -113,22 +111,55 @@ let todoList = {
 
 //Change Todos
     changeButton.onclick = function (event){
+
+// Disables other edit buttons while editing target todo
+      for (let i = 0; i < changeItem.length;i++){
+        if(changeItem[i] !== event.target){
+          changeItem[i].disabled = true;
+        }
+      }
+
+
       let div = event.target.parentNode;
       let p = div.previousElementSibling;
       let previousText = p.textContent;
+      let submitButton = document.createElement ('button');
+      let cancelButton = document.createElement('button');
       let position;
 
-
       for (let i = 0; i < todoList.todos.length; i++){
-        debugger;
         if (event.target === changeItem[i]){
           position = i;
         }
       }
 
-      p.innerHTML = '↠<input type="text" class="change" placeholder=" ' + previousText + '">';
+//storing the original content of the list item
+      let originalContent = li[position].innerHTML;
 
-      let
+//adding a cancel button
+      cancelButton.innerHTML = '&cross;';
+      cancelButton.className = 'cancelButton';
+      submitButton.innerHTML = '&check;';
+      div.appendChild(cancelButton);
+
+//Submit edit button
+      changeItem[position].onclick = function (event){
+        debugger;
+        changeItem[position].innerHTML = '&#9998;'
+        p.textContent = '↠' + changeInput[0].value;
+        div.removeChild(cancelButton);
+
+        for (let i = 0; i < changeItem.length;i++){
+          if(changeItem[i] !== event.target){
+            changeItem[i].disabled = false;
+          }
+        }
+      }
+
+      changeItem[position].innerHTML = "&check;";
+
+      p.innerHTML = '↠<input type="text" class="changeInput" placeholder=" ' + previousText + '">';
+
 
     }
 
@@ -253,7 +284,6 @@ let todoList = {
 
 
 if (checkBox.length > 0){
-  debugger;
   for (let i = 0; i < checkBox.length; i++){
     for (let i = 0; i < checkBox.length; i++){
         if (checkBox[i].checked === true){
