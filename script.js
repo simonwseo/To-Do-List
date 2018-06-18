@@ -6,6 +6,8 @@ const changeInput = document.getElementsByClassName('changeInput');
 const checkBox = document.getElementsByClassName('completed');
 const deleteItem = document.getElementsByClassName('deleteButton');
 const changeItem = document.getElementsByClassName('changeButton');
+const cancelItem = document.getElementsByClassName('cancelButton');
+const submitItem = document.getElementsByClassName('submitButton');
 const displayItems = document.getElementById('displayItems');
 
 
@@ -111,14 +113,12 @@ let todoList = {
 
 //Change Todos
     changeButton.onclick = function (event){
-
 // Disables other edit buttons while editing target todo
       for (let i = 0; i < changeItem.length;i++){
         if(changeItem[i] !== event.target){
           changeItem[i].disabled = true;
         }
       }
-
 
       let div = event.target.parentNode;
       let p = div.previousElementSibling;
@@ -133,36 +133,44 @@ let todoList = {
         }
       }
 
-//storing the original content of the list item
-      let originalContent = li[position].innerHTML;
+      //storing the original content of the list item
+     let originalContent = li[position].innerHTML;
+
+      p.innerHTML = '↠<input type="text" class="changeInput" placeholder=" ' + previousText + '">';
 
 //adding a cancel button
       cancelButton.innerHTML = '&cross;';
       cancelButton.className = 'cancelButton';
       submitButton.innerHTML = '&check;';
+      submitButton.className = 'submitButton';
+
+      div.removeChild(changeItem[position]);
+      div.appendChild(submitButton);
       div.appendChild(cancelButton);
 
 //Submit edit button
-      changeItem[position].onclick = function (event){
-        debugger;
-        changeItem[position].innerHTML = '&#9998;'
+      submitButton.onclick = function (event){
+
         p.textContent = '↠' + changeInput[0].value;
-        div.removeChild(cancelButton);
 
         for (let i = 0; i < changeItem.length;i++){
           if(changeItem[i] !== event.target){
             changeItem[i].disabled = false;
           }
         }
+
+       div.removeChild(cancelButton);
+       div.removeChild(submitButton);
+
+       let changeButton = document.createElement('button');
+
+       changeButton.innerHTML = '&#9998;'
+       changeButton.className = 'changeButton'
+
+       div.appendChild(changeButton);
+
       }
-
-      changeItem[position].innerHTML = "&check;";
-
-      p.innerHTML = '↠<input type="text" class="changeInput" placeholder=" ' + previousText + '">';
-
-
     }
-
 
 //Deleting Todos
     deleteButton.onclick = function (event){

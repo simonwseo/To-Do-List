@@ -98,6 +98,7 @@ button{
 }
 
 .changeButton,
+.submitButton,
 .cancelButton{
   border-radius: 50%;
 }
