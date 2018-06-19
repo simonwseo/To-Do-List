@@ -116,6 +116,7 @@ let todoList = {
 
     changeButton.onclick = function (event){
 
+
 // Disables other edit buttons while editing target todo
       for (let i = 0; i < changeItem.length;i++){
         if(changeItem[i] !== event.target){
@@ -126,9 +127,8 @@ let todoList = {
       let div = event.target.parentNode;
       let p = div.previousElementSibling;
       let previousText = p.textContent;
-      let submitButton = document.createElement ('button');
-      let cancelButton = document.createElement('button');
       let listPosition;
+
 
       for (let i = 0; i < todoList.todos.length; i++){
         if (event.target === changeItem[i]){
@@ -138,27 +138,28 @@ let todoList = {
 
       p.innerHTML = '↠<input type="text" class="changeInput" placeholder=" ' + previousText + '">';
 
-//adding a cancel button
+      changeItem[listPosition].style.display = 'none';
+
+    if (todoList.todos[listPosition].buttonsCreated === false){
+
+
+      let submitButton = document.createElement ('button');
+      let cancelButton = document.createElement('button');
+
       cancelButton.innerHTML = '&cross;';
       cancelButton.className = 'cancelButton';
       submitButton.innerHTML = '&check;';
       submitButton.className = 'submitButton';
 
-      changeItem[listPosition].style.display = 'none';
-
-      if (todoList.todos[listPosition].buttonsCreated === false){
       div.appendChild(submitButton);
       div.appendChild(cancelButton);
 
       todoList.todos[listPosition].buttonsCreated = true;
-    }else{
-      cancelItem[listPosition].style.display ='inline-block';
-      submitItem[listPosition].style.display ='inline-block';
-    }
 
-//Submit edit button
+      //Submit edit button@@@@@@@@@@@@@@@@@@@@@@@@@
       submitButton.onclick = function (event){
 
+        let newTodo = '↠' + changeInput[0].value;
         let position;
 
         for (let i = 0; i < submitItem.length; i++){
@@ -167,9 +168,11 @@ let todoList = {
           }
         }
 
-        debugger;
+        p.textContent = newTodo;
 
-        p.textContent = '↠' + changeInput[0].value;
+        console.log(newTodo);
+        todoList.changeTodo(listPosition,newTodo);
+
 
         for (let i = 0; i < changeItem.length;i++){
           if(changeItem[i] !== event.target){
@@ -182,9 +185,11 @@ let todoList = {
       cancelItem[position].style.display = 'none';
       submitItem[position].style.display = 'none';
 
+      addList.disabled = false;
+
       }
 
-//Cancel edit button
+      //Cancel edit button@@@@@@@@@@@@@@@
         cancelButton.onclick = function (event){
 
           let position;
@@ -195,20 +200,32 @@ let todoList = {
             }
           }
 
+          p.innerHTML = todoList.todos[listPosition].todoText;
+
+
           for (let i = 0; i < changeItem.length;i++){
             if(changeItem[i] !== event.target){
               changeItem[i].disabled = false;
             }
           }
 
-          p.textContent = previousText;
-
         changeItem[listPosition].style.display = 'inline-block';
 
         cancelItem[position].style.display = 'none';
         submitItem[position].style.display = 'none';
 
+        addList.disabled = false;
+
         }
+
+    }else{
+      cancelItem[listPosition].style.display ='inline-block';
+      submitItem[listPosition].style.display ='inline-block';
+    }
+
+    if(changeItem[listPosition].style.display === 'none'){
+      addList.disabled = true;
+    }
 
     }
 
@@ -258,7 +275,7 @@ let todoList = {
 
 
   changeTodo: function(targetNum, content) {
-  this.todos[targetNum] = content;
+  this.todos[targetNum].todoText = content;
   },
   deleteTodo: function(itemNumber){
     this.todos.splice(itemNumber, 1);
