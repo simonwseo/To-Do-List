@@ -1,20 +1,16 @@
-const input = document.getElementById('listItem');
-const addList = document.getElementById('addList');
-const ul = document.querySelector('ul');
-const li = document.getElementsByTagName('li');
-const changeInput = document.getElementsByClassName('changeInput');
-const checkBox = document.getElementsByClassName('completed');
-const deleteItem = document.getElementsByClassName('deleteButton');
-const changeItem = document.getElementsByClassName('changeButton');
-const cancelItem = document.getElementsByClassName('cancelButton');
-const submitItem = document.getElementsByClassName('submitButton');
-const displayItems = document.getElementById('displayItems');
+var input = document.getElementById('listItem');
+var addList = document.getElementById('addList');
+var ul = document.querySelector('ul');
+var li = document.getElementsByTagName('li');
+var changeInput = document.getElementsByClassName('changeInput');
+var checkBox = document.getElementsByClassName('completed');
+var deleteItem = document.getElementsByClassName('deleteButton');
+var changeItem = document.getElementsByClassName('changeButton');
+var cancelItem = document.getElementsByClassName('cancelButton');
+var submitItem = document.getElementsByClassName('submitButton');
+var displayItems = document.getElementById('displayItems');
 
-
-
-
-
-const handlers = {
+var handlers = {
    displayTodos: () => {
       todoList.displayTodos();
     },
@@ -62,7 +58,7 @@ let todoList = {
   },
   addTodo: function(todoText) {
 
-   let compareText = "↠" + todoText;
+   let todoItem = "↠" + todoText;
    let blankSpace = 0;
 
     //Prevents user from entering invalid todo item
@@ -86,7 +82,7 @@ let todoList = {
     let changeButton = document.createElement('button');
 
     listItem.className = "todoStyle";
-    listItem.innerHTML ="<p>" + "↠" + todoText + "</p>";
+    listItem.innerHTML ="<p>" + todoItem + "</p>";
 
     completedItem.type = 'checkbox';
     completedItem.className = 'completed';
@@ -107,7 +103,7 @@ let todoList = {
     input.value = "";
 
     this.todos.push({
-      todoText: listItem.firstElementChild.textContent,
+      todoText: todoItem,
       completed: false,
       buttonsCreated: false
     });
@@ -115,13 +111,12 @@ let todoList = {
 //Change Todos
 
     changeButton.onclick = function (event){
-
-
 // Disables other edit buttons while editing target todo
       for (let i = 0; i < changeItem.length;i++){
         if(changeItem[i] !== event.target){
           changeItem[i].disabled = true;
         }
+        deleteItem[i].disabled = true;
       }
 
       let div = event.target.parentNode;
@@ -136,13 +131,15 @@ let todoList = {
         }
       }
 
+      while(previousText.charAt(0) === '↠'){
+        previousText = previousText.substr(1);
+      }
+
       p.innerHTML = '↠<input type="text" class="changeInput" placeholder=" ' + previousText + '">';
 
       changeItem[listPosition].style.display = 'none';
 
     if (todoList.todos[listPosition].buttonsCreated === false){
-
-
       let submitButton = document.createElement ('button');
       let cancelButton = document.createElement('button');
 
@@ -167,65 +164,60 @@ let todoList = {
             position = i;
           }
         }
-
         p.textContent = newTodo;
-
-        console.log(newTodo);
         todoList.changeTodo(listPosition,newTodo);
-
 
         for (let i = 0; i < changeItem.length;i++){
           if(changeItem[i] !== event.target){
             changeItem[i].disabled = false;
+            deleteItem[i].disabled = false;
           }
         }
-
       changeItem[listPosition].style.display = 'inline-block';
-
       cancelItem[position].style.display = 'none';
       submitItem[position].style.display = 'none';
-
       addList.disabled = false;
-
       }
 
       //Cancel edit button@@@@@@@@@@@@@@@
         cancelButton.onclick = function (event){
 
-          let position;
+          let cancelButton = event.target;
+          let submitButton = event.target.previousElementSibling;
 
-          for (let i = 0; i < cancelItem.length; i++){
-            if (event.target === cancelItem[i]){
-              position = i;
-            }
-          }
 
+
+          // let position;
+          //
+          // for (let i = 0; i < cancelItem.length; i++){
+          //   if (event.target === cancelItem[i]){
+          //     position = i;
+          //   }
+          // }
           p.innerHTML = todoList.todos[listPosition].todoText;
-
 
           for (let i = 0; i < changeItem.length;i++){
             if(changeItem[i] !== event.target){
               changeItem[i].disabled = false;
+              deleteItem[i].disabled = false;
             }
           }
-
         changeItem[listPosition].style.display = 'inline-block';
-
-        cancelItem[position].style.display = 'none';
-        submitItem[position].style.display = 'none';
-
+        cancelButton.style.display = 'none';
+        submitButton.style.display = 'none';
         addList.disabled = false;
-
         }
 
     }else{
-      cancelItem[listPosition].style.display ='inline-block';
-      submitItem[listPosition].style.display ='inline-block';
-    }
+      debugger;
+      let submitItem = event.target.nextElementSibling;
+      let cancelItem = submitItem.nextElementSibling;
 
-    if(changeItem[listPosition].style.display === 'none'){
-      addList.disabled = true;
+      submitItem.style.display ='inline-block';
+      cancelItem.style.display ='inline-block';
     }
+   // disable the add button while item gets edited.
+      addList.disabled = true;
 
     }
 
@@ -245,8 +237,9 @@ let todoList = {
         todoList.deleteTodo(position);
         ul.removeChild(todoItem);
       }else{
+        //Do nothing
       }
-
+       addList.disabled = false;
       }
 
 // adding onclick attribute for the newly created check box item
@@ -281,7 +274,6 @@ let todoList = {
     this.todos.splice(itemNumber, 1);
   },
   toggleCompleted: function(position){
-
     let todo = this.todos[position];
     todo.completed = !todo.completed;
   },
@@ -290,7 +282,6 @@ let todoList = {
 
     let totalTodos = this.todos.length;
     let completedTodos = 0;
-
 
     for (let i = 0; i < totalTodos; i++){
       if (this.todos[i].completed === true){
@@ -328,39 +319,36 @@ let todoList = {
        ul.innerHTML = "";
        todo.splice(0,todo.length);
        }else{
-
+         //Do nothing
        }
+       addList.disabled = false;
     },
 
 //Clears all that are Checked
     clearAllChecked: function(){
       let allClear = 0;
 
-  for (let i = 0; i < checkBox.length; i++){
-    if (checkBox[i].checked === true){
-      allClear++;
-    }
-  }
-
-  if (allClear === checkBox.length){
-    ul.innerHTML = "";
-    this.todos.splice(0,this.todos.length);
-  }
-
-
-
-if (checkBox.length > 0){
-  for (let i = 0; i < checkBox.length; i++){
-    for (let i = 0; i < checkBox.length; i++){
+      for (let i = 0; i < checkBox.length; i++){
         if (checkBox[i].checked === true){
-          ul.removeChild(li[i]);
-          this.todos.splice(i,1);
-          allClear--;
-     }
-    }
-    if (allClear === 1){
-      i = -1;
-    }
+          allClear++;
+        }
+      }
+
+      if (allClear === checkBox.length){
+        ul.innerHTML = "";
+        this.todos.splice(0,this.todos.length);
+      }else if (checkBox.length > 0){
+        for (let i = 0; i < checkBox.length; i++){
+         for (let i = 0; i < checkBox.length; i++){
+            if (checkBox[i].checked === true){
+              ul.removeChild(li[i]);
+              this.todos.splice(i,1);
+              allClear--;
+         }
+        }
+        if (allClear === 1){
+          i = -1;
+        }
   }
  }
 }
