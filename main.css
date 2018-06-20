@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+body,
+button{
+  font-family: 'Roboto', sans-serif;
+}
+
 
 .container{
   text-align: center;
