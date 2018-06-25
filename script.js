@@ -1,7 +1,7 @@
 var input = document.getElementById('listItem');
 var addList = document.getElementById('addList');
-var ul = document.querySelector('ul');
 var li = document.getElementsByTagName('li');
+var ul = document.querySelector('ul');
 var changeInput = document.getElementsByClassName('changeInput');
 var checkBox = document.getElementsByClassName('completed');
 var deleteItem = document.getElementsByClassName('deleteButton');
@@ -248,7 +248,7 @@ let todoList = {
     li[position].style.fontStyle = 'italic';
     li[position].style.textDecoration = 'line-through';
   }else{
-    li[position].style.color ="black";
+    li[position].style.color ="#e5e5e5";
     li[position].style.fontStyle = 'normal';
     li[position].style.textDecoration = 'none';
   }
@@ -286,7 +286,7 @@ let todoList = {
            this.todos[i].completed = false;
            checkBox[i].checked = false;
 
-           li[i].style.color ="black";
+           li[i].style.color ="#e5e5e5";
            li[i].style.fontStyle = 'normal';
            li[i].style.textDecoration = 'none';
 

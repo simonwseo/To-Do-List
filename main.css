@@ -5,18 +5,21 @@
 body,
 button{
   font-family: 'Roboto', sans-serif;
+  color: #e5e5e5;
 }
 
 
 .container{
+  background-color: #0c3966;
   text-align: center;
   margin: 0 auto;
   padding-bottom: 10px;
   padding-right: 10px;
   padding-left: 10px;
-  border: 2px solid black;
+  border: 2px solid gray;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 3px 3px 1px 1px rgba(0, 0, 0, .7);
 }
 
 ul {
@@ -49,7 +52,7 @@ button{
   font-size: 14px;
   border-radius: 5px;
   border-color: transparent;
-  background-color: rgba(30,30,30,0.1);
+  background-color: lightgray;
   margin-bottom: 10px;
   padding-right: 5px;
   padding-left: 5px;
@@ -124,6 +127,8 @@ button{
 .submitButton,
 .cancelButton{
   border-radius: 50%;
+  height: 20px;
+  width: 20px;
 }
 
 .changeButton:disabled{
@@ -135,6 +140,7 @@ button{
   padding: 5px 10px;
   border-radius: 5px;
   outline: none;
+  color: black;
 }
 
 .checkAll{
