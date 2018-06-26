@@ -2,12 +2,7 @@ var input = document.getElementById('listItem');
 var addList = document.getElementById('addList');
 var li = document.getElementsByTagName('li');
 var ul = document.querySelector('ul');
-var changeInput = document.getElementsByClassName('changeInput');
 var checkBox = document.getElementsByClassName('completionStatus');
-var deleteItem = document.getElementsByClassName('deleteButton');
-var changeItem = document.getElementsByClassName('changeButton');
-var cancelItem = document.getElementsByClassName('cancelButton');
-var submitItem = document.getElementsByClassName('submitButton');
 var displayItems = document.getElementById('displayItems');
 
 var handlers = {
@@ -98,7 +93,6 @@ let todoList = {
 
 },
 
-
   changeTodo: function(targetNum, content) {
   this.todos[targetNum].todoText = content; //changing array item's text content
   },
@@ -111,8 +105,7 @@ let todoList = {
   },
 
   toggleAll: function(){
-
-    let totalTodos = this.todos.length;
+    let todo = this.todos;
     let completedTodos = 0;
 
    //counting how many completed todos there are
@@ -123,26 +116,25 @@ let todoList = {
     });
 
     //if everything is completed then toggle all incomplete
-    if (totalTodos === completedTodos){
-         for(let i = 0; i < totalTodos; i++){
-           this.todos[i].completed = false;
-           checkBox[i].checked = false;
+    if (todo.length === completedTodos){
+         todo.forEach(function (todo,position){
+           todo.completed = false;
+           checkBox[position].checked = false;
 
-           li[i].style.color ="#e5e5e5";
-           li[i].style.fontStyle = 'normal';
-           li[i].style.textDecoration = 'none';
-
-         }
+           li[position].style.color ="#e5e5e5";
+           li[position].style.fontStyle = 'normal';
+           li[position].style.textDecoration = 'none';
+         })
       //if opposite, toggle everything completed
        }else{
-         for(let i = 0; i < this.todos.length; i++){
-           this.todos[i].completed = true;
-           checkBox[i].checked = true;
+          todo.forEach(function (todo,position){
+           todo.completed = true;
+           checkBox[position].checked = true;
 
-           li[i].style.color = 'gray';
-           li[i].style.fontStyle = 'italic';
-           li[i].style.textDecoration = 'line-through';
-       }
+           li[position].style.color = 'gray';
+           li[position].style.fontStyle = 'italic';
+           li[position].style.textDecoration = 'line-through';
+       })
      }
    },
 
@@ -165,31 +157,31 @@ let todoList = {
     clearAllChecked: function(){
       let allClear = 0;
 
-      // counts how many list items are checked as completed
-      for (let i = 0; i < checkBox.length; i++){
-        if (checkBox[i].checked === true){
+      this.todos.forEach(function (todo,position){
+        if(checkBox[position].checked ===true){
           allClear++;
         }
-      }
+      })
 
       // if everything is checked then delete everything in ul/array
       if (allClear === checkBox.length){
         ul.innerHTML = "";
         this.todos.splice(0,this.todos.length);
       }else{ // if not, delete just the checked items
+        debugger;
         for (let i = 0; i < checkBox.length; i++){
          for (let i = 0; i < checkBox.length; i++){
             if (checkBox[i].checked === true){
               ul.removeChild(li[i]);
               this.todos.splice(i,1);
               allClear--;
-         }
-        }
-        if (allClear === 1){
-          i = -1;
-        }
-  }
- }
+             }
+            }
+           if (allClear === 1){
+             i = -1;
+          }
+       }
+     }
 
  addList.disabled = false;
 },
@@ -202,7 +194,6 @@ findButtonPosition: function(eventTarget, button){
       buttonPosition = position;
     }
   })
-
   return  buttonPosition;
 }
 
@@ -257,6 +248,7 @@ ul.addEventListener('click', function(event) {
       submitButton.style.display ='inline-block';
       cancelButton.style.display ='inline-block';
     }
+     addList.disabled = true;
   }
 
   if(event.target.className === 'submitButton'){
@@ -279,6 +271,7 @@ ul.addEventListener('click', function(event) {
     submitButton.style.display = 'none';
     cancelButton.style.display = 'none';
 
+    addList.disabled = false;
    }
 
    if(event.target.className === 'cancelButton'){
@@ -296,6 +289,7 @@ ul.addEventListener('click', function(event) {
      cancelButton.style.display = 'none';
      submitButton.style.display = 'none';
 
+     addList.disabled = false;
    }
 
    if(event.target.className === 'deleteButton'){
