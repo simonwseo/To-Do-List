@@ -30,7 +30,7 @@ let todoList = {
     //hides list
     if (ul.style.display == 'none'){
        displayItems.textContent = 'Hide List';
-       displayItems.style.backgroundColor = 'rgb(0,0,0,0.7)';
+       displayItems.style.backgroundColor = 'black';
        displayItems.style.color = 'white';
        ul.style.display = 'block';
     }else{
