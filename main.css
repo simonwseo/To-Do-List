@@ -2,15 +2,14 @@
   box-sizing: border-box;
 }
 
-body,
-button{
+body{
   font-family: 'Roboto', sans-serif;
-  color: #e5e5e5;
+  color: black;
 }
 
 
 .container{
-  background-color: #0c3966;
+  background-color: white;
   text-align: center;
   margin: 0 auto;
   padding-bottom: 10px;
@@ -33,10 +32,20 @@ li {
   margin-bottom: 0.35em;
 }
 
+.firstContainer{
+  display:flex;
+  align-items: center;
+  width: 85%;
+}
+
+.secondContainer{
+  width: 15%;
+  text-align: right;
+}
+
 p {
   margin: 0;
   display: inline-block;
-  width: 75%;
   word-wrap: break-word;
 }
 
@@ -129,6 +138,7 @@ button{
   border-radius: 50%;
   height: 20px;
   width: 20px;
+  margin-left: 5px;
 }
 
 .changeButton:disabled{

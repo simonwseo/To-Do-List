@@ -56,13 +56,19 @@ let todoList = {
     //Create an li element and add the input value as text content
     //Also create another div to store all the buttons in
     let listItem = document.createElement('li');
-    let container = document.createElement('div');
+    let firstContainer = document.createElement('div');
+    let secondContainer = document.createElement('div');
+    let todoParagraph = document.createElement('p');
     let completedItem = document.createElement('input');
     let deleteButton = document.createElement('button');
     let changeButton = document.createElement('button');
 
     listItem.className = "todoStyle";
-    listItem.innerHTML ="<p>" + todoItem + "</p>";
+
+    firstContainer.className = 'firstContainer';
+    secondContainer.className = 'secondContainer';
+
+    todoParagraph.textContent = todoItem;
 
     completedItem.type = 'checkbox';
     completedItem.className = 'completionStatus';
@@ -73,11 +79,14 @@ let todoList = {
     changeButton.innerHTML = '&#9998;'
     changeButton.className = 'changeButton'
 
+
     ul.appendChild(listItem);
-    listItem.appendChild(container);
-    container.appendChild(completedItem);
-    container.appendChild(deleteButton);
-    container.appendChild(changeButton);
+    listItem.appendChild(firstContainer);
+    listItem.appendChild(secondContainer);
+    firstContainer.appendChild(completedItem);
+    firstContainer.appendChild(todoParagraph);
+    secondContainer.appendChild(deleteButton);
+    secondContainer.appendChild(changeButton);
 
 //Reset the input value after creating the todo item
     input.value = "";
@@ -121,7 +130,7 @@ let todoList = {
            todo.completed = false;
            checkBox[position].checked = false;
 
-           li[position].style.color ="#e5e5e5";
+           li[position].style.color ="black";
            li[position].style.fontStyle = 'normal';
            li[position].style.textDecoration = 'none';
          })
@@ -206,7 +215,7 @@ ul.addEventListener('click', function(event) {
   let deleteButton = document.getElementsByClassName('deleteButton');
 
   if(event.target.className === 'changeButton'){
-    let todoParagraph = event.target.parentNode.previousElementSibling;
+    let todoParagraph = event.target.parentNode.previousElementSibling.childNodes[1];
     let buttonPosition = todoList.findButtonPosition(todoParagraph,p);
     let currentTodoText = todoParagraph.textContent;
 
@@ -256,7 +265,7 @@ ul.addEventListener('click', function(event) {
     let changeInput = document.getElementsByClassName('changeInput');
     let submitButton = event.target;
     let cancelButton = event.target.nextElementSibling;
-    let todoParagraph = event.target.parentNode.previousElementSibling;
+    let todoParagraph = event.target.parentNode.previousElementSibling.childNodes[1];
     let newTodoText = '↠' + changeInput[0].value;
     todoParagraph.textContent = newTodoText;
 
@@ -277,7 +286,7 @@ ul.addEventListener('click', function(event) {
    if(event.target.className === 'cancelButton'){
      let cancelButton = event.target;
      let submitButton = event.target.previousElementSibling;
-     let todoParagraph = event.target.parentNode.previousElementSibling;
+     let todoParagraph = event.target.parentNode.previousElementSibling.childNodes[1];
      let buttonPosition = todoList.findButtonPosition(todoParagraph, p);
 
      todoParagraph.innerHTML = todo[buttonPosition].todoText;
@@ -293,9 +302,8 @@ ul.addEventListener('click', function(event) {
    }
 
    if(event.target.className === 'deleteButton'){
-     let div = event.target.parentNode;
-     let todoParagraph = div.previousElementSibling;
-     let todoListItem = div.parentNode;
+     let todoListItem = event.target.parentNode.parentNode;
+     let todoParagraph = event.target.parentNode.previousElementSibling.childNodes[1];
      let buttonPosition = todoList.findButtonPosition(todoParagraph, p);
 
      if (confirm ('Are you sure you want to delete this todo item?')){
@@ -305,7 +313,7 @@ ul.addEventListener('click', function(event) {
    }
 
    if(event.target.className === 'completionStatus'){
-    let todoParagraph = event.target.parentNode.previousElementSibling;
+    let todoParagraph = event.target.nextElementSibling;
     let todoListItem = todoParagraph.parentNode;
     let buttonPosition = todoList.findButtonPosition(todoParagraph, p);
 
@@ -316,7 +324,7 @@ ul.addEventListener('click', function(event) {
       todoListItem.style.fontStyle = 'italic';
       todoListItem.style.textDecoration = 'line-through';
     }else{
-      todoListItem.style.color ="#e5e5e5";
+      todoListItem.style.color ="black";
       todoListItem.style.fontStyle = 'normal';
       todoListItem.style.textDecoration = 'none';
       }
