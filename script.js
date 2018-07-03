@@ -238,7 +238,7 @@ ul.addEventListener('click', function(event) {
     let changeInput = document.createElement('input');
     changeInput.type = 'text';
     changeInput.className = 'changeInput';
-    changeInput.placeholder = currentTodoText;
+    changeInput.value = currentTodoText;
     todoParagraph.appendChild(changeInput);
 
     if (todo[buttonPosition].buttonsCreated === false){
@@ -310,7 +310,7 @@ ul.addEventListener('click', function(event) {
      let todoParagraph = event.target.parentNode.previousElementSibling.childNodes[1];
      let buttonPosition = todoList.findButtonPosition(todoParagraph, p);
 
-     if (confirm ('Are you sure you want to delete this todo item?')){
+     if (confirm ('Are you sure you want to delete this item?')){
        todoList.deleteTodo(buttonPosition);
        ul.removeChild(todoListItem);
      }
@@ -318,7 +318,7 @@ ul.addEventListener('click', function(event) {
 
    if(event.target.className === 'completionStatus'){
     let todoParagraph = event.target.nextElementSibling;
-    let todoListItem = todoParagraph.parentNode;
+    let todoListItem = todoParagraph.parentNode.parentNode;
     let buttonPosition = todoList.findButtonPosition(todoParagraph, p);
 
     todoList.toggleCompleted(buttonPosition);
