@@ -221,8 +221,14 @@ input[type=checkbox]{
 
 @media (min-width: 65em){
   .container{
-    width: 55%;
-    padding-left: 75px;
-    padding-right: 75px;
+    width: 60%;
+    padding-right: 60px;
   }
+
+  @media (min-width: 75em){
+    .container{
+      width: 55%;
+      padding-left: 70px;
+      padding-right: 70px;
+    }
 }
