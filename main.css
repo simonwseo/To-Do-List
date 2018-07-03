@@ -49,6 +49,8 @@ li {
 
 .secondContainer button{
   margin-right: 5px;
+  border: rgba(0,0,0,0.5) solid 0.5px;
+  border-radius: 3px;
 }
 
 p {
@@ -105,7 +107,7 @@ input[type=checkbox]{
 
 #addList:active{
   transform:scale(0.9);
-  box-shadow: inset 10px 10px black;
+  box-shadow: inset 2px 2px 2px black;
 
 }
 
@@ -133,16 +135,6 @@ input[type=checkbox]{
   /* padding: 0.5px 3.5px; */
 }
 
-.deleteButton{
-
-}
-
-
-.changeButton,
-.submitButton,
-.cancelButton{
-
-}
 
 
 
@@ -157,8 +149,18 @@ input[type=checkbox]{
   border: none;
   outline: none;
   color: white;
-  /* background: black; */
   font-size: 8pt;
+}
+
+.globalButtons button:hover{
+  transition: 0.5s;
+  transform: translate(0,-3px);
+}
+
+.globalButtons button:active{
+  transition: 0.5s;
+  transform:scale(0.9);
+  box-shadow: inset 2px 2px 2px black;
 }
 
 #displayItems{
