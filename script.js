@@ -245,7 +245,7 @@ ul.addEventListener('click', function(event) {
       let div = event.target.parentNode;
       let submitButton = document.createElement('button');
       let cancelButton = document.createElement('button');
-      cancelButton.innerHTML = '&cross;';
+      cancelButton.innerHTML = 'X';
       cancelButton.className = 'cancelButton';
       submitButton.innerHTML = '&check;';
       submitButton.className = 'submitButton';
