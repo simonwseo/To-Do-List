@@ -15,10 +15,10 @@ body{
   padding-bottom: 10px;
   padding-right: 10px;
   padding-left: 10px;
-  border: 2px solid gray;
+  border: 0.5px solid lightgray;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .7);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .userInput{
@@ -222,6 +222,7 @@ input[type=checkbox]{
 @media (min-width: 65em){
   .container{
     width: 60%;
+    padding-left: 60px;
     padding-right: 60px;
   }
 
