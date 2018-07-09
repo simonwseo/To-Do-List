@@ -1,3 +1,5 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
 *{
   box-sizing: border-box;
 }
@@ -77,12 +79,57 @@ li {
 .firstContainer{
   display:flex;
   align-items: center;
-  width: 80%;
+  width: 85%;
 }
 
+label{
+  cursor: pointer;
+}
+
+input[type="checkBox"]{
+  display:none;
+}
+
+input[type="checkBox"] + .label-text:before{
+  content: "\f096";
+  font-family: "FontAwesome";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 1.1em;
+}
+
+input[type="checkBox"]:checked + .label-text:before{
+  content: "\f14a";
+  font-family: "FontAwesome";
+  color: black !important;
+  animation-name: checked;
+  animation-duration: 200ms;
+
+}
+
+@keyframes checked{
+  0%{
+    transform: scale(0);
+  }
+
+  90&{
+    transform: scale(1.5);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
 
 .secondContainer{
-  width: 20%;
+  width: 15%;
   text-align: right;
 }
 
@@ -108,13 +155,13 @@ li {
 
 p {
   margin: 0;
+  padding-left: 10px;
   display: inline-block;
   word-wrap: break-word;
   overflow: hidden;
-  width: 100%;
+  width: 90%;
 }
 
-input[type=checkbox],
 button{
   cursor: pointer;
 }

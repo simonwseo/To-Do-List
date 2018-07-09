@@ -64,8 +64,12 @@ let todoList = {
     let secondContainer = document.createElement('div');
     let todoParagraph = document.createElement('p');
     let completedItem = document.createElement('input');
+    let label = document.createElement('label');
+    let span = document.createElement('span');
     let deleteButton = document.createElement('button');
     let changeButton = document.createElement('button');
+
+
 
     listItem.className = "todoStyle";
 
@@ -77,6 +81,8 @@ let todoList = {
     completedItem.type = 'checkbox';
     completedItem.className = 'completionStatus';
 
+    span.className = 'label-text';
+
     deleteButton.innerHTML = 'X';
     deleteButton.className = 'deleteButton';
 
@@ -84,10 +90,14 @@ let todoList = {
     changeButton.className = 'changeButton'
 
 
+
+
     ul.appendChild(listItem);
     listItem.appendChild(firstContainer);
     listItem.appendChild(secondContainer);
-    firstContainer.appendChild(completedItem);
+    firstContainer.appendChild(label);
+    label.appendChild(completedItem);
+    label.appendChild(span);
     firstContainer.appendChild(todoParagraph);
     secondContainer.appendChild(deleteButton);
     secondContainer.appendChild(changeButton);
@@ -317,7 +327,8 @@ ul.addEventListener('click', function(event) {
    }
 
    if(event.target.className === 'completionStatus'){
-    let todoParagraph = event.target.nextElementSibling;
+
+    let todoParagraph = event.target.parentNode.nextElementSibling;
     let todoListItem = todoParagraph.parentNode.parentNode;
     let buttonPosition = todoList.findButtonPosition(todoParagraph, p);
 
