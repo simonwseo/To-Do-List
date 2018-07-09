@@ -5,26 +5,36 @@
 h1{
   font-family: 'Vollkorn', serif;
   font-size: 2.35rem;
+  margin-top: 0.5rem;
 }
 
 body{
   font-family: 'Vollkorn', serif;
   color: black;
+  background-image: url("https://images.unsplash.com/photo-1523958399470-c15bf82fcea9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=24bc33ab52ef2dc36a177c25c24da122&auto=format&fit=crop&w=1013&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 
 .container{
-  background-color: white;
+  background-color: #F3F6F8;
   text-align: center;
   margin: 0 auto;
   margin-top: 2rem;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   padding-right: 10px;
   padding-left: 10px;
   border: 0.5px solid lightgray;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+#time{
+  text-align: right;
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
 }
 
 .userInput{
@@ -40,7 +50,29 @@ ul {
 
 li {
   margin-bottom: 0.35em;
+  font-size: 1.2rem;
+  animation-name: slide-down;
+  animation-duration: 0.3s;
+  position: relative;
+  animation-timing-function: ease-out;
 }
+
+@keyframes slide-down{
+  0%{
+    top: -5px;
+  }
+  50%{
+    top: 5px;
+  }
+  75%{
+    top: -5px;
+  }
+  100%{
+    top: 0px;
+  }
+}
+
+
 
 .firstContainer{
   display:flex;
@@ -48,16 +80,21 @@ li {
   width: 80%;
 }
 
+
 .secondContainer{
   width: 20%;
   text-align: right;
 }
 
+
+
 .secondContainer button{
   margin-right: 5px;
   border: rgba(0,0,0,0.5) solid 0.5px;
   border-radius: 3px;
+  background-color: #F3F6F8;
 }
+
 
 .secondContainer button:active,
 .secondContainer button:focus{
@@ -82,8 +119,9 @@ button{
   cursor: pointer;
 }
 
-input[type=checkbox]{
+.checkBox{
   margin: 5px;
+
 }
 
 
@@ -115,6 +153,28 @@ input[type=checkbox]{
   border-radius: 5px;
   background-color: dodgerblue;
   color: white;
+  animation-name: bounce;
+  animation-duration: 1s;
+  position: relative;
+}
+
+@keyframes bounce{
+  0%{
+    top: 0px;
+  }
+  25%{
+    top: -10px;
+  }
+  50%{
+    top: 0px;
+  }
+  75%{
+    top: -10px;
+  }
+  100%{
+    top: 0px;
+  }
+
 }
 
 #addList:focus{
@@ -134,6 +194,8 @@ input[type=checkbox]{
   margin-top: 0;
   margin-bottom: 0;
 }
+
+
 
 .changeInput {
   border-radius: 5px;

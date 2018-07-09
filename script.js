@@ -77,7 +77,7 @@ let todoList = {
     completedItem.type = 'checkbox';
     completedItem.className = 'completionStatus';
 
-    deleteButton.textContent = 'X';
+    deleteButton.innerHTML = 'X';
     deleteButton.className = 'deleteButton';
 
     changeButton.innerHTML = '&#9998;'

@@ -10,11 +10,12 @@
 
   <body>
     <div class="container">
+      <div id="time"></div>
         <h1> To Do List </h1>
 
         <div class="userInput">
         <input type="text" id="listItem" onkeydown = "if (event.keyCode == 13){ addList.click()}">
-        <button onclick="handlers.addTodo()" id="addList"> &Leftarrow;  </button>
+        <button onclick="handlers.addTodo()" id="addList"> Add  </button>
       </div>
 
       <ul>
@@ -25,11 +26,12 @@
       <button onclick="handlers.displayTodos()" id="displayItems"><span>Hide List</span></button>
       <button onclick="handlers.toggleAll()" class="checkAll"> Check All </button>
       <button onclick="handlers.deleteAll()" class="deleteAll"> Clear All </button>
-      <button onclick="handlers.clearAllChecked()" class="clearAllChecked"> Clear Checked </button>
+      <button onclick="handlers.clearAllChecked()" class="clearAllChecked"> Clear Completed </button>
 
     </div>
 
    </div>
      <script src="script.js"></script>
+     <script src="time.js"></script>
   </body>
 </html>
